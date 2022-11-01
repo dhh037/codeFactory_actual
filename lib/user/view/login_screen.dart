@@ -28,10 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     final dio = Dio();
 
-    const emulatorIp = '10.0.2.2:3000';
-    const simulatorIp = '127.0.0.1:3000';
 
-    final ip = Platform.isAndroid ? emulatorIp : simulatorIp;
 
     return DefaultLayout(
         child: SingleChildScrollView(
@@ -94,14 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               TextButton(
-                onPressed: () async {
-                  const refreshToken =
-                      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAY29kZWZhY3RvcnkuYWkiLCJzdWIiOiJmNTViMzJkMi00ZDY4LTRjMWUtYTNjYS1kYTlkN2QwZDkyZTUiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTY2NzI5Nzc0MiwiZXhwIjoxNjY3Mzg0MTQyfQ.YFH9fwIumxR9VRWMrMPAW_KOFubmKvWBSDQHQ-sQcFE";
-                  final resp = await dio.post("http://$ip/auth/token",
-                      options: Options(
-                          headers: {'authorization': 'Bearer $refreshToken'}));
-                  print(resp.data);
-                },
+                onPressed: () async {},
                 child: Text("회원가입"),
                 style: TextButton.styleFrom(primary: Colors.black),
               ),
