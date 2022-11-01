@@ -2,10 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:actual/common/const/colors.dart';
+import 'package:actual/common/const/data.dart';
 import 'package:actual/common/layout/default_layout.dart';
 import 'package:actual/common/view/root_tab.dart';
+import 'package:actual/common/view/splash_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../../common/component/custom_text_form_field.dart';
 
@@ -22,6 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     final dio = Dio();
 
     const emulatorIp = '10.0.2.2:3000';
@@ -75,10 +79,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       options:
                           Options(headers: {'authorization': 'Basic $token'}));
 
+                  final refreshToken = resp.data['refreshToken'];
+                  final accessToken = resp.data['accessToken'];
+
+                  await storage.write(key: REFRESH_TOKEN_KEY, value: refreshToken);
+                  await storage.write(key: ACCESS_TOKEN_KEY, value: accessToken );
+
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (_) => RootTab()));
-
-                  print(resp.data);
                 },
                 child: Text("로그인"),
                 style: ElevatedButton.styleFrom(
