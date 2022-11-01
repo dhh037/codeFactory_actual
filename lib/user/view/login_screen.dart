@@ -28,8 +28,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
     final dio = Dio();
 
-
-
     return DefaultLayout(
         child: SingleChildScrollView(
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
